@@ -17,12 +17,11 @@ namespace api_dotnet.Controllers
     [ApiController]
     public class StockControllers : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
+
         private readonly IStockRepository _stockRepo;
-        public StockControllers(ApplicationDBContext context, IStockRepository stockRepo)
+        public StockControllers(IStockRepository stockRepo)
         {
             _stockRepo = stockRepo;
-            _context = context;
         }
 
         [HttpGet]
@@ -32,7 +31,7 @@ namespace api_dotnet.Controllers
             var stockDto = stocks.Select(s => s.ToStockDto());
 
 
-            return Ok(stocks);
+            return Ok(stockDto);
         }
 
         [HttpGet("{id}")]

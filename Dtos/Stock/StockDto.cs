@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api_dotnet.Dtos.Comment;
 
 namespace api_dotnet.Dtos.Stock
 {
@@ -20,5 +21,7 @@ namespace api_dotnet.Dtos.Stock
         public string Industry { get; set; } = string.Empty;
 
         public long Marketcap { get; set; }
+
+        public List<CommentDto>? Comments { get; set; }
     }
 }
