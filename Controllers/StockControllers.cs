@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_dotnet.Data;
 using api_dotnet.Dtos.Stock;
+using api_dotnet.Helpers;
 using api_dotnet.Interface;
 using api_dotnet.Mappers;
 using api_dotnet.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,9 +27,10 @@ namespace api_dotnet.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
-            var stocks = await _stockRepo.GetAllAsync();
+            var stocks = await _stockRepo.GetAllAsync(query);
             var stockDto = stocks.Select(s => s.ToStockDto());
 
 
